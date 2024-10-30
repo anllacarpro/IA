@@ -6,6 +6,12 @@ myenv/
 # C extensions
 *.so
 
+#Generated files
+*.csv
+*.xlsx
+*.pdf
+
+
 # Distribution / packaging
 .Python
 build/

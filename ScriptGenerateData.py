@@ -111,7 +111,7 @@ pdf_paths = [
 ]
 
 # Ruta del archivo CSV de salida
-ruta_archivo_csv = r"C:/Users/estef/OneDrive/Documentos/Ciclo 8/Inteligencia Artificial/CHATBOT IA/preguntas_respuestas_libros.csv"
+ruta_archivo_csv = "data/libro.csv"
 
 # Extraer texto de cada PDF y generar preguntas y respuestas
 all_qa_pairs = []
@@ -128,17 +128,27 @@ all_qa_pairs.extend(exercises_and_solutions)
 evaluations = generate_evaluations(num_evaluations=10000)
 all_qa_pairs.extend(evaluations)
 
-# Asegurarse de tener al menos 300,000 datos
-while len(all_qa_pairs) < 300000:
+# Asegurarse de tener al menos 50,000 datos
+while len(all_qa_pairs) < 50000:
     for pdf_path in pdf_paths:
         text = extract_text_from_pdf(pdf_path)
         qa_pairs = generate_qa_pairs(text, num_pairs_per_concept=50)
         all_qa_pairs.extend(qa_pairs)
-        if len(all_qa_pairs) >= 300000:
+        if len(all_qa_pairs) >= 50000:
             break
+            # Si aún no se han generado suficientes pares, generar más ejercicios y evaluaciones
+        while len(all_qa_pairs) < 50000:
+                additional_exercises = generate_exercises_and_solutions(num_exercises=1000)
+                all_qa_pairs.extend(additional_exercises)
+                
+                additional_evaluations = generate_evaluations(num_evaluations=1000)
+                all_qa_pairs.extend(additional_evaluations)
+                
+                if len(all_qa_pairs) >= 50000:
+                    break
 
 # Guardar todas las preguntas y respuestas en un archivo CSV
 df = pd.DataFrame(all_qa_pairs, columns=["text", "label", "response"])
 df.to_csv(ruta_archivo_csv, index=False, encoding="utf-8")
 
-print(f"Archivo '{ruta_archivo_csv}' generado con éxito con más de 300,000 datos.")
+print(f"Archivo '{ruta_archivo_csv}' generado con éxito con más de " + str(len(all_qa_pairs)) + " pares de preguntas y respuestas.")

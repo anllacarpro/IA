@@ -7,7 +7,7 @@ import datetime
 import os
 
 # Cargar los datos desde el archivo CSV
-ruta_archivo_csv = r"C:/Users/estef/OneDrive/Documentos/Ciclo 8/Inteligencia Artificial/CHATBOT IA/database/Libros.csv"
+ruta_archivo_csv = "data/libro.csv"
 df = pd.read_csv(ruta_archivo_csv)
 
 # Asegúrate de que hay una columna 'text' para el texto y 'label' para las etiquetas
