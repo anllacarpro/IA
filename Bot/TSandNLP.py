@@ -7,6 +7,7 @@ import numpy as np
 
 # Load the data generated
 df = pd.read_csv("data/libro.csv")
+
 questions = df['text'].values
 answers = df['response'].values
 
