@@ -11,6 +11,14 @@ myenv/
 *.xlsx
 *.pdf
 
+models/
+
+PetImages/
+
+*.zip
+*.tar.gz
+*.tar.xz
+*.tar.bz2
 
 # Distribution / packaging
 .Python
